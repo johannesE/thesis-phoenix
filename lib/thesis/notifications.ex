@@ -37,7 +37,7 @@ defmodule Thesis.Notifications do
       "other" => []
     }
     |> notifications_from_host_app(conn, notifications())
-    |> notifications_regarding_env(Mix.env)
+    |> notifications_regarding_env
     |> notifications_regarding_page(conn.assigns[:thesis_page])
   end
 
@@ -47,8 +47,7 @@ defmodule Thesis.Notifications do
     acc
   end
 
-  def notifications_regarding_env(acc, :test), do: acc
-  def notifications_regarding_env(acc, _) do
+  def notifications_regarding_env(acc) do
     acc
     |> notification_to_run_migration_for_version_0_3_0()
   end
